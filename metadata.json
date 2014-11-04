@@ -1,0 +1,15 @@
+{
+  "name": "jclagache-teecli",
+  "version": "0.1.0",
+  "author": "jclagache",
+  "summary": "Puppet module installing the Cross-platform Command-line Client for Team Foundation Server.",
+  "license": "Apache 2.0",
+  "source": "https://github.com/jclagache/puppet-teecli.git",
+  "project_page": "https://github.com/jclagache/puppet-teecli",
+  "issues_url": "https://github.com/jclagache/puppet-teecli/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
+    {"name":"maestrodev/wget", "version_requirement": ">= 1.5.6" }
+  ]
+}
+
