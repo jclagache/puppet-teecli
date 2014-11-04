@@ -35,19 +35,19 @@
 #
 # Copyright 2014 Your name here, unless otherwise noted.
 #
+include stdlib
+
 class teecli (
   $version = $teecli::params::version,
   $srcdir = $teecli::params::srcdir) inherits teecli::params {	
 
-  case $::kernel {
-   	'Linux': {
-     		ensure_packages(['unzip'])
-     		Package['unzip'] -> Exec['unpack-teecli']
-   	}
-    else {
-      fail('This module only works on Linux')
-    }
+ if $::kernel == 'Linux' { 	
+    ensure_packages(['unzip'])
+    Package['unzip'] -> Exec['unpack-teecli']
   }
+  else {
+    fail('This module only works on Linux')
+  }    
 
   case $version {
    	'12.0.2': { $source = 'http://download.microsoft.com/download/F/0/4/F04E054B-9DB5-4C24-AF84-DF1A290F5C73/TEE-CLC-12.0.2.zip' }
