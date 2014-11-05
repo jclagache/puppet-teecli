@@ -47,18 +47,16 @@ class teecli (
   }
   else {
     fail('This module only works on Linux')
-  }    
+  }  
 
-  case $version {
-   	'12.0.2': { $source = 'http://download.microsoft.com/download/F/0/4/F04E054B-9DB5-4C24-AF84-DF1A290F5C73/TEE-CLC-12.0.2.zip' }
-     	default:  { 
-     		$version = '12.0.2'
-     		$source = 'http://download.microsoft.com/download/F/0/4/F04E054B-9DB5-4C24-AF84-DF1A290F5C73/TEE-CLC-12.0.2.zip'
-     	}
+  $versions = {'2013' => 'http://download.microsoft.com/download/F/0/4/F04E054B-9DB5-4C24-AF84-DF1A290F5C73/TEE-CLC-12.0.2.zip', '11.0.0.1306' => 'http://download.microsoft.com/download/4/2/7/427AC2CF-8A5B-4DE9-8221-22F54B1903E2/TEE-CLC-11.0.0.1306.zip', '10.1.0' => 'http://download.microsoft.com/download/C/B/A/CBA6331C-08CC-4E68-80F8-1E8D2BD41D82/TEE-CLC-10.1.0.2011121402.zip', '10.0.0' => 'http://download.microsoft.com/download/9/8/7/987D6B7C-F577-4297-8F60-E4B6A9EA4BF9/TEE-CLC-10.0.0.zip'} 
+
+  if !has_key($versions, $version) {
+    fail("$version is an unknow TEE-CLI version")
   }
 
 	wget::fetch { 'teecli':
-   	source      => "$source",
+   	source      => "$versions[version]",
    	destination => "${srcdir}/TEE-CLC-${version}.zip"
   } ->
   exec { 'unpack-teecli':
