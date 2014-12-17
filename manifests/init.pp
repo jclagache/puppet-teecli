@@ -76,4 +76,12 @@ class teecli (
    	ensure => link,
    	target => "/usr/share/TEE-CLC-${version}/tf",
   }
+
+  exec { '/etc/profile.d/teecli.sh':
+      command     => 'sh /etc/profile.d/teecli.sh',
+      refreshonly => true,
+      subscribe   => File[ '/etc/profile.d/teecli.sh' ],
+      path        => '/usr/bin:/bin:/usr/sbin:/sbin',
+  }
+  
 }
