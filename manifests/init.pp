@@ -83,5 +83,12 @@ class teecli (
       subscribe   => File[ '/etc/profile.d/teecli.sh' ],
       path        => '/usr/bin:/bin:/usr/sbin:/sbin',
   }
-  
+
+  exec { 'accept eula' :
+    command     => 'tf eula -accept',
+    refreshonly => true,
+    subscribe   => File[ '/usr/bin/tf' ],
+    path        => '/usr/bin:/bin:/usr/sbin:/sbin',   
+  }
+
 }
